@@ -19,18 +19,11 @@
  * It also shows the number of courses which are in progress and whose completion criteria is undefined but the manger.
  * @package blocks
  * @author: Azmat Ullah, Talha Noor
- * @date: 2013
  */
 
 require_once('lib.php');
 /**
  * This class shows the content in block through calling lib.php function.
- *
- *
- *
- * @package    block
- * @copyright  Copyrights © 2012 - 2013 | 3i Logic Innovations Co.(Pvt) Ltd. All Rights Reserved.
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 class block_course_status_tracker extends block_base {
