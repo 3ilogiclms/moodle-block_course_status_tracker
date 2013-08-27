@@ -19,7 +19,6 @@
  * It also shows the number of courses which are in progress and whose completion criteria is undefined but the manger.
  * @package blocks
  * @author: Azmat Ullah, Talha Noor
- * @date: 2013
  */
 
 /**
