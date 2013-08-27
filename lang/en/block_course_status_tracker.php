@@ -19,7 +19,6 @@
  * It also shows the number of courses which are in progress and whose completion criteria is undefined but the manger.
  * @package blocks
  * @author: Azmat Ullah, Talha Noor
- * @date: 2013
  */
 $string['pluginname']='Course Status Tracker';
 $string['course_status']='Course Status Tracker';
@@ -28,3 +27,5 @@ $string['s_no']='S. No.';
 $string['course_name']='Course Name';
 $string['course_comp_date']='Course Completion Date';
 $string['grade']='Grade';
+$string['course_status:view']='Course Status View';
+$string['course_status:addinstance']='Add Instance';
