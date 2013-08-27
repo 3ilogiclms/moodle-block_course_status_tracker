@@ -19,23 +19,40 @@
  * It also shows the number of courses which are in progress and whose completion criteria is undefined but the manger.
  * @package blocks
  * @author: Azmat Ullah, Talha Noor
- * @date: 2013
  */
 
 defined('MOODLE_INTERNAL') || die();
 $capabilities = array(
-
-    'block/course_status_tracker' => array(
-
+    'block/course_status:myaddinstance' => array(
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_COURSE,
+        'archetypes' => array(
+            'user' => CAP_ALLOW
+        ),
+ 
+        'clonepermissionsfrom' => 'moodle/my:manageblocks'
+    ),
+ 
+    'block/course_status:addinstance' => array(
+        'riskbitmask' => RISK_SPAM | RISK_XSS,
+ 
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_BLOCK,
+        'archetypes' => array(
+            'editingteacher' => CAP_ALLOW,
+            'manager' => CAP_ALLOW,
+            ),
+ 
+        'clonepermissionsfrom' => 'moodle/site:manageblocks'
+    ),
+        'block/course_status:view' => array(
         'captype' => 'read',
         'contextlevel' => CONTEXT_COURSE,
-        'legacy' => array(
-            'guest' => CAP_PREVENT,
-            'student' => CAP_ALLOW,
-            'teacher' => CAP_ALLOW,
-            'editingteacher' => CAP_ALLOW,
-            'coursecreator' => CAP_ALLOW,
-            'manager' => CAP_ALLOW
-        )
-    )
-   );
+        'archetypes' => array(
+            
+            'guest'        => CAP_PREVENT
+            
+            ),
+ 
+        ),
+);
