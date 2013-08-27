@@ -22,14 +22,9 @@
  */
 require_once("{$CFG->libdir}/formslib.php");
 require_once("lib.php");
+
 /**
  * This class contains function display_report which return user course name, course grade & completion date.
- *
- *
- *
- * @package    blocks
- * @copyright  Copyrights � 2012 - 2013 | 3i Logic Innovations Co.(Pvt) Ltd. All Rights Reserved.
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class course_status_form extends moodleform {
     public function definition() {
