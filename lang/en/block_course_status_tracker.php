@@ -27,5 +27,5 @@ $string['s_no']='S. No.';
 $string['course_name']='Course Name';
 $string['course_comp_date']='Course Completion Date';
 $string['grade']='Grade';
-$string['course_status:view']='Course Status View';
-$string['course_status:addinstance']='Add Instance';
+$string['course_status_tracker:view']='Course Status View';
+$string['course_status_tracker:addinstance']='Add Instance';
