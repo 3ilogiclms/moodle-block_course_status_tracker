@@ -34,7 +34,7 @@ $pageurl = new moodle_url('/blocks/course_status/view.php');
 echo $OUTPUT->header();
 $viewpage = required_param('viewpage', PARAM_INT);
 if($viewpage == 1) {
-    $form = new block_course_status_tracker();
+    $form = new course_status_form();
     $table=$form->display_report();
     if($table) {
         echo "<div id='prints'>";
