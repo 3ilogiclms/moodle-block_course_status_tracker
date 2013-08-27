@@ -19,8 +19,6 @@
  * It also shows the number of courses which are in progress and whose completion criteria is undefined but the manger.
  * @package blocks
  * @author: Azmat Ullah, Talha Noor
- 
- * @date: 2013
  */
 require_once("{$CFG->libdir}/formslib.php");
 require_once("lib.php");
@@ -30,7 +28,7 @@ require_once("lib.php");
  *
  *
  * @package    blocks
- * @copyright  Copyrights © 2012 - 2013 | 3i Logic Innovations Co.(Pvt) Ltd. All Rights Reserved.
+ * @copyright  Copyrights ï¿½ 2012 - 2013 | 3i Logic Innovations Co.(Pvt) Ltd. All Rights Reserved.
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class course_status_form extends moodleform {
