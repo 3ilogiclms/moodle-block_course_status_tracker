@@ -71,7 +71,7 @@ class course_status_form extends moodleform {
         $baseurl = new moodle_url('view.php', array('sort' => $sort, 'dir' => $dir, 'perpage' => $perpage));
         echo $OUTPUT->paging_bar($changescount, $page, $perpage, $baseurl);
         $table = new html_table();
-        $table->head  = array('S. No.', 'Course Name', 'Course Completion Date', 'Grade');
+        $table->head  = array('Serial No.', 'Course Name', 'Course Completion Date', 'Grade');
         $table->size  = array('10%', '30%', '40%', '20%');
         $table->align  = array('center', 'left', 'center', 'center');
         $table->width = '80%';
