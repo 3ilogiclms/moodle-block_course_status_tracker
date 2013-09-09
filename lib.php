@@ -161,7 +161,7 @@ function user_enrolled_courses_report($userid) {
     $courses = enrol_get_users_courses($userid, false, 'id, shortname, showgrades');
     if ($courses) {
         $table = new html_table();
-        $table->head  = array('S. No.', 'Module', 'Course Name');
+        $table->head  = array('Serial No.', 'Module', 'Course Name');
         $table->size  = array('15%', '35%', '50%');
         $table->align = array('center', 'left', 'left');
         $table->width = '80%';
