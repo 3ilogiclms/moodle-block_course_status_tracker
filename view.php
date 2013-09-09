@@ -31,6 +31,8 @@ $PAGE->set_pagelayout('standard');
 $PAGE->set_title(get_string("pluginname", 'block_course_status_tracker'));
 $PAGE->set_heading('Course Status');
 $pageurl = new moodle_url('/blocks/course_status/view.php');
+$PAGE->navbar->ignore_active();
+$PAGE->navbar->add(get_string("pluginname", 'block_course_status_tracker'));
 echo $OUTPUT->header();
 $viewpage = required_param('viewpage', PARAM_INT);
 if($viewpage == 1) {
