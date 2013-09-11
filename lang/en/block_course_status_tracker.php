@@ -29,3 +29,17 @@ $string['course_comp_date']='Course Completion Date';
 $string['grade']='Grade';
 $string['course_status_tracker:view']='Course Status View';
 $string['course_status_tracker:addinstance']='Add Instance';
+$string['enrolled_courses']='Enrolled Courses';
+$string['completed_courses']='Completed Courses';
+$string['inprogress_courses']='Course In Progress';
+$string['undefined_coursecriteria']='Undefined Course Criteria';
+$string['coursecompletion_setting']='Course Completion has not enable yet';
+$string['job_title']='Job Title';
+$string['department']='Department';
+$string['joining_date']='Joining Date';
+$string['course']='Course';
+$string['report_coursecompletion']='Course Completion Report';
+$string['report_courseenrollment']='Course Enrollment Report';
+$string['module']='Module';
+$string['name']='Name';
+
