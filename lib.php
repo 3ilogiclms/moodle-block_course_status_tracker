@@ -98,7 +98,7 @@ function course_name($id) {
     $course=$DB->get_record_sql('SELECT fullname  FROM {course} WHERE id = ?',
                                  array($id));
     $course=$course->fullname;
-    $course=$course. ' Course';
+    $course=$course.' '.get_string('course', 'block_course_status_tracker');
     return $course;
 }
 /**
@@ -117,14 +117,14 @@ function user_details($id) {
     $result = $DB->get_record_sql('SELECT concat(firstname," ",lastname) as name,department,DATE_FORMAT(DATE(FROM_UNIXTIME(timecreated)),"%d-%b-%y")
                                   as date  FROM {user} WHERE id = ?', array($id));
     $table='<table width="80%"><tr><td width="20%" style="vertical-align:middle;" rowspan="5">'.$user->picture.'</td></tr>
-           <tr><td width="20%">Name</td><td>'.$result->name.'</td></tr>';
+           <tr><td width="20%">'.get_string('name', 'block_course_status_tracker').'</td><td>'.$result->name.'</td></tr>';
 
     $check_designatino_field=get_custome_field($id, "Designation"); // Custom Field name for designation is "Designation".
     if($check_designatino_field != 0 ) {
         $table .='<tr><td>Job Title</td><td>'.$check_designatino_field.'</td></tr>';
     }
-    $table .='<tr><td>Department</td><td>'.$result->department.'</td></tr>
-             <tr><td>Joining Date</td><td>'.$result->date.'</td></tr>
+   $table .='<tr><td>'.get_string('department', 'block_course_status_tracker').'</td><td>'.$result->department.'</td></tr>
+             <tr><td>'.get_string('joining_date', 'block_course_status_tracker').'</td><td>'.$result->date.'</td></tr>
              </table>';
     return $table;
 }
@@ -161,7 +161,7 @@ function user_enrolled_courses_report($userid) {
     $courses = enrol_get_users_courses($userid, false, 'id, shortname, showgrades');
     if ($courses) {
         $table = new html_table();
-        $table->head  = array('Serial No.', 'Module', 'Course Name');
+        $table->head  = array(get_string('s_no', 'block_course_status_tracker'), get_string('module', 'block_course_status_tracker'), get_string('course_name', 'block_course_status_tracker'));
         $table->size  = array('15%', '35%', '50%');
         $table->align = array('center', 'left', 'left');
         $table->width = '80%';
