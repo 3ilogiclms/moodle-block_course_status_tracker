@@ -72,12 +72,12 @@ class block_course_status_tracker extends block_base {
                                             $course_criteria_not_set."</a>";
             $link_count_inprogress_courses = "<a href='".$CFG->wwwroot."/blocks/course_status_tracker/view.php?viewpage=1'>".
                                              $count_inprogress_courses."</a>";
-            $this->content->text .= "Enrolled Courses :	<b>".$link_enrolled_courses."</b><br>";
-            $this->content->text .= "Completed Courses : <b>".$link_count_complete_courses."</b><br>";
-            $this->content->text .= "Course In Progress : <b>".$count_inprogress_courses."</b><br>";
-            $this->content->text .= "Undefined Course Criteria : <b>".$course_criteria_not_set."</b><br>";
+             $this->content->text .= get_string('enrolled_courses', 'block_course_status_tracker')." :	<b>".$link_enrolled_courses."</b><br>";
+            $this->content->text .= get_string('completed_courses', 'block_course_status_tracker')." : <b>".$link_count_complete_courses."</b><br>";
+            $this->content->text .= get_string('inprogress_courses', 'block_course_status_tracker')." : <b>".$count_inprogress_courses."</b><br>";
+            $this->content->text .= get_string('undefined_coursecriteria', 'block_course_status_tracker')." : <b>".$course_criteria_not_set."</b><br>";
         } else {
-              $this->content->text .= "Course Completion has not enable yet";
+              $this->content->text .= get_string('coursecompletion_setting', 'block_course_status_tracker');
         }
         return $this->content;
     }
