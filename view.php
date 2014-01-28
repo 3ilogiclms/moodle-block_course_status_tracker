@@ -27,6 +27,8 @@ require_once('course_form.php');
 require_once("lib.php");
 require_login();
 global $DB, $OUTPUT, $PAGE, $CFG, $USER;
+$context = context_system::instance();
+$PAGE->set_context($context);
 $PAGE->set_pagelayout('standard');
 $PAGE->set_title(get_string("pluginname", 'block_course_status_tracker'));
 $PAGE->set_heading('Course Status');
