@@ -36,7 +36,7 @@ class block_course_status_tracker extends block_base {
      * @return boolean
      **/
     public function applicable_formats() {
-        return array('site' => true, 'course' => false);
+        return array('all' => true);
     }
     /**
      * Gets the contents of the block (course view)
@@ -46,15 +46,48 @@ class block_course_status_tracker extends block_base {
      public function isguestuser($user = null)
      {return false;}
     public function get_content() {
-        global $CFG, $OUTPUT, $USER;
+        global $CFG, $OUTPUT, $USER, $DB;
         if ($this->content !== null) {
             return $this->content;
         }
         $this->content = new stdClass;
         if ($CFG->enablecompletion) {
-            $enrolled_courses=user_enrolled_courses($USER->id);
-            $count_complete_courses=count_complete_course($USER->id);
-            $course_criteria_not_set=count_course_criteria($USER->id);
+            // $enrolled_courses=user_enrolled_courses($USER->id);
+            // Enrolled courses.
+			 $count_course=0;
+    		 $courses = enrol_get_users_courses($USER->id, false, 'id, shortname, showgrades');
+    		 if ($courses) {
+                 foreach ($courses as $course) {
+                     $count_course+=1;
+                 }
+        }
+    		$enrolled_courses = $count_course;
+			// End enrolled courses.
+            // $count_complete_courses=count_complete_course($USER->id);
+            // Completed courses.
+            // $count_complete_courses=count_complete_course($USER->id);
+			$total_courses=$DB->get_record_sql('SELECT count(course) as total_course FROM {course_completion_crit_compl} 						                                               WHERE userid = ?', array($USER->id));
+                                        
+            $total_courses=$total_courses->total_course;
+            $count_complete_courses=$total_courses;
+			// End completed courses.
+            // $course_criteria_not_set=count_course_criteria($USER->id);
+            // Course criteria not set.
+            // $course_criteria_not_set=count_course_criteria($USER->id);
+			 $count=0;
+             $courses = enrol_get_users_courses($USER->id, false, 'id, shortname, showgrades');
+             if ($courses) {
+        	     $course_criteria_ns = array();
+                 foreach ($courses as $course) {
+                     $exist = $DB->record_exists('course_completion_criteria', array('course' => $course->id));
+                     if(!$exist) {
+                     $count++;
+                     $course_criteria_ns[] = $course->id;
+                }
+             }
+            }
+            $course_criteria_not_set= $count;
+			// End course criteria.
             $count_inprogress_courses=($enrolled_courses)-($count_complete_courses+$course_criteria_not_set);
             if ($enrolled_courses > 0) {
                 $link_enrolled_courses = "<u><a href='".$CFG->wwwroot."/blocks/course_status_tracker/view.php?viewpage=2'>".
