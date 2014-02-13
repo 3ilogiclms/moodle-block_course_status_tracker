@@ -18,12 +18,12 @@
  * The plugin shows the number and list of enrolled courses and completed courses.
  * It also shows the number of courses which are in progress and whose completion criteria is undefined but the manger.
  * @package blocks
- * @author: Azmat Ullah, Talha Noor
+ * @author: Azmat Ullah, Talha Noor, Michael Milette (www.instruxmedia.com)
  */
 $string['pluginname']='Course Status Tracker';
 $string['course_status']='Course Status Tracker';
 $string['course_status_tracker']='Course Status Tracker';
-$string['s_no']='S. No.';
+$string['s_no']='<abbr title="Number">No.</abbr>';
 $string['course_name']='Course Name';
 $string['course_comp_date']='Course Completion Date';
 $string['grade']='Grade';
@@ -39,7 +39,6 @@ $string['department']='Department';
 $string['joining_date']='Joining Date';
 $string['course']='Course';
 $string['report_coursecompletion']='Course Completion Report';
-$string['report_courseenrollment']='Course Enrollment Report';
+$string['report_courseenrollment']='Course Enrolment Report';
 $string['module']='Module';
 $string['name']='Name';
-

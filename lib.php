@@ -18,7 +18,7 @@
  * The plugin shows the number and list of enrolled courses and completed courses.
  * It also shows the number of courses which are in progress and whose completion criteria is undefined but the manger.
  * @package blocks
- * @author: Azmat Ullah, Talha Noor
+ * @author: Azmat Ullah, Talha Noor, Michael Milette (www.instruxmedia.com)
  */
 
 /**
@@ -38,7 +38,7 @@ function count_complete_course($userid) {
  * This function retrun the total number of enrolled courses
  *
  * @see enrol_get_users_courses()
- * @param int   $userid Moodle user id 
+ * @param int   $userid Moodle user id
  * @return String $count_course return total enrolled courses.
  */
 function user_enrolled_courses($userid) {
@@ -84,7 +84,7 @@ function count_course_criteria($userid) {
 function module_name($id) {
     global $DB;
     $module=$DB->get_record_sql('SELECT name FROM {course_categories}  WHERE id = ?', array($id));
-    $module=$module->name;
+    $module=format_string($module->name);
     return $module;
 }
 /**
@@ -97,7 +97,7 @@ function course_name($id) {
     global $DB;
     $course=$DB->get_record_sql('SELECT fullname  FROM {course} WHERE id = ?',
                                  array($id));
-    $course=$course->fullname;
+    $course=format_string($course->fullname);
     $course=$course.' '.get_string('course', 'block_course_status_tracker');
     return $course;
 }
@@ -114,17 +114,17 @@ function user_details($id) {
     $user->id = $id; // User Id.
     $user->picture = $OUTPUT->user_picture($user, array('size'=>100));
     // Fetch Data.
-    $result = $DB->get_record_sql('SELECT concat(firstname," ",lastname) as name,department,DATE_FORMAT(DATE(FROM_UNIXTIME(timecreated)),"%d-%b-%y")
+    $result = $DB->get_record_sql('SELECT concat(firstname," ",lastname) as name,department,timecreated
                                   as date  FROM {user} WHERE id = ?', array($id));
     $table='<table width="80%"><tr><td width="20%" style="vertical-align:middle;" rowspan="5">'.$user->picture.'</td></tr>
            <tr><td width="20%">'.get_string('name', 'block_course_status_tracker').'</td><td>'.$result->name.'</td></tr>';
 
     $check_designatino_field=get_custome_field($id, "Designation"); // Custom Field name for designation is "Designation".
     if($check_designatino_field != 0 ) {
-        $table .='<tr><td>Job Title</td><td>'.$check_designatino_field.'</td></tr>';
+        $table .='<tr><td>'.get_string('job_title', 'block_course_status_tracker').'</td><td>'.format_string($check_designatino_field).'</td></tr>';
     }
-   $table .='<tr><td>'.get_string('department', 'block_course_status_tracker').'</td><td>'.$result->department.'</td></tr>
-             <tr><td>'.get_string('joining_date', 'block_course_status_tracker').'</td><td>'.$result->date.'</td></tr>
+    $table .='<tr><td>'.get_string('department', 'block_course_status_tracker').'</td><td>'.format_string($result->department).'</td></tr>
+             <tr><td>'.get_string('joining_date', 'block_course_status_tracker').'</td><td>'.userdate($result->date, get_string('strftimedate', 'core_langconfig')).'</td></tr>
              </table>';
     return $table;
 }
@@ -140,11 +140,11 @@ function get_custome_field($userid, $text) {
     $result = $DB->get_record_sql('SELECT table2.data as fieldvalue  FROM {user_info_field} as table1  join  {user_info_data} as table2
                                    on table1.id=table2.fieldid where table2.userid=? AND table1.name=?',
                                    array($userid, $text));
-    $fieldvalue=$result->fieldvalue;
-    if(empty($fieldvalue)) {
+
+    if(empty($$result->fieldvalue)) {
         return "0";
     } else {
-        return $result->fieldvalue;
+        return format_string($result->fieldvalue);
     }
 }
 /**

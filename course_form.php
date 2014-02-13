@@ -18,7 +18,7 @@
  * The plugin shows the number and list of enrolled courses and completed courses.
  * It also shows the number of courses which are in progress and whose completion criteria is undefined but the manger.
  * @package blocks
- * @author: Azmat Ullah, Talha Noor
+ * @author: Azmat Ullah, Talha Noor, Michael Milette (www.instruxmedia.com)
  */
 require_once("{$CFG->libdir}/formslib.php");
 require_once("lib.php");
@@ -38,7 +38,7 @@ class course_status_form extends moodleform {
         $perpage = optional_param('perpage', 30, PARAM_INT);    // How many record per page.
         $sort    = optional_param('sort', 'firstname', PARAM_ALPHA);
         $dir     = optional_param('dir', 'DESC', PARAM_ALPHA);
-        $sql = "SELECT course, gradefinal, DATE_FORMAT(DATE( FROM_UNIXTIME(timecompleted)),'%d-%b-%y')as dates FROM {course_completion_crit_compl} where userid = ".$userid;
+        $sql = "SELECT course, gradefinal, timecompleted as dates FROM {course_completion_crit_compl} where userid = ".$userid;
         $changescount = $DB->count_records_sql($sql, array($userid));
         $columns = array('s_no' => get_string('s_no', 'block_course_status'),
                          'course_name' => get_string('course_name', 'block_course_status'),
@@ -83,7 +83,7 @@ class course_status_form extends moodleform {
             $row = array();
             $row[] = ++$i;
             $row[] = course_name($log->course);
-            $row[] = $log->dates;
+            $row[] = userdate($log->dates, get_string('strftimedate', 'core_langconfig'));
             $row[] = round($log->gradefinal).'%';
             $table->data[] = $row;
         }

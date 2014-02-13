@@ -18,11 +18,11 @@
  * The plugin shows the number and list of enrolled courses and completed courses.
  * It also shows the number of courses which are in progress and whose completion criteria is undefined but the manger.
  * @package blocks
- * @author: Azmat Ullah, Talha Noor
+ * @author: Azmat Ullah, Talha Noor, Michael Milette (www.instruxmedia.com)
  * @date: 13th Aug, 2013
  */
 
-$plugin->version   = 2013060700;        // The current plugin version (Date: YYYYMMDDXX)
+$plugin->version   = 2013060703;        // The current plugin version (Date: YYYYMMDDXX)
 $plugin->requires  = 2010112400;        // Requires this Moodle version
 $plugin->release = '2.3';
 $plugin->maturity = MATURITY_BETA;

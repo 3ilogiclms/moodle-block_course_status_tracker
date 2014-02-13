@@ -18,7 +18,7 @@
  * The plugin shows the number and list of enrolled courses and completed courses.
  * It also shows the number of courses which are in progress and whose completion criteria is undefined but the manger.
  * @package blocks
- * @author: Azmat Ullah, Talha Noor
+ * @author: Azmat Ullah, Talha Noor, Michael Milette (www.instruxmedia.com)
  */
 
 require_once('lib.php');
@@ -35,7 +35,10 @@ class block_course_status_tracker extends block_base {
      *
      * @return boolean
      **/
-    public function applicable_formats() {
+//    public function applicable_formats() {
+//        return array('site' => true, 'course' => true, 'my' => true);
+//    }
+     public function applicable_formats() {
         return array('all' => true);
     }
     /**
@@ -52,32 +55,31 @@ class block_course_status_tracker extends block_base {
         }
         $this->content = new stdClass;
         if ($CFG->enablecompletion) {
-            // $enrolled_courses=user_enrolled_courses($USER->id);
             // Enrolled courses.
-			 $count_course=0;
-    		 $courses = enrol_get_users_courses($USER->id, false, 'id, shortname, showgrades');
-    		 if ($courses) {
+            // $enrolled_courses=user_enrolled_courses($USER->id);
+             $count_course=0;
+             $courses = enrol_get_users_courses($USER->id, false, 'id, shortname, showgrades');
+             if ($courses) {
                  foreach ($courses as $course) {
                      $count_course+=1;
                  }
         }
-    		$enrolled_courses = $count_course;
-			// End enrolled courses.
-            // $count_complete_courses=count_complete_course($USER->id);
+            $enrolled_courses = $count_course;
+            // End enrolled courses.
             // Completed courses.
             // $count_complete_courses=count_complete_course($USER->id);
-			$total_courses=$DB->get_record_sql('SELECT count(course) as total_course FROM {course_completion_crit_compl} 						                                               WHERE userid = ?', array($USER->id));
-                                        
+            $total_courses=$DB->get_record_sql('SELECT count(course) as total_course FROM {course_completion_crit_compl} WHERE userid = ?', array($USER->id));
+
             $total_courses=$total_courses->total_course;
             $count_complete_courses=$total_courses;
-			// End completed courses.
-            // $course_criteria_not_set=count_course_criteria($USER->id);
+            // End completed courses.
+
             // Course criteria not set.
             // $course_criteria_not_set=count_course_criteria($USER->id);
-			 $count=0;
+             $count=0;
              $courses = enrol_get_users_courses($USER->id, false, 'id, shortname, showgrades');
              if ($courses) {
-        	     $course_criteria_ns = array();
+                 $course_criteria_ns = array();
                  foreach ($courses as $course) {
                      $exist = $DB->record_exists('course_completion_criteria', array('course' => $course->id));
                      if(!$exist) {
@@ -87,7 +89,8 @@ class block_course_status_tracker extends block_base {
              }
             }
             $course_criteria_not_set= $count;
-			// End course criteria.
+            // End course criteria.
+            // Course in progress
             $count_inprogress_courses=($enrolled_courses)-($count_complete_courses+$course_criteria_not_set);
             if ($enrolled_courses > 0) {
                 $link_enrolled_courses = "<u><a href='".$CFG->wwwroot."/blocks/course_status_tracker/view.php?viewpage=2'>".
@@ -105,7 +108,7 @@ class block_course_status_tracker extends block_base {
                                             $course_criteria_not_set."</a>";
             $link_count_inprogress_courses = "<a href='".$CFG->wwwroot."/blocks/course_status_tracker/view.php?viewpage=1'>".
                                              $count_inprogress_courses."</a>";
-             $this->content->text .= get_string('enrolled_courses', 'block_course_status_tracker')." :	<b>".$link_enrolled_courses."</b><br>";
+            $this->content->text .= get_string('enrolled_courses', 'block_course_status_tracker')." : <b>".$link_enrolled_courses."</b><br>";
             $this->content->text .= get_string('completed_courses', 'block_course_status_tracker')." : <b>".$link_count_complete_courses."</b><br>";
             $this->content->text .= get_string('inprogress_courses', 'block_course_status_tracker')." : <b>".$count_inprogress_courses."</b><br>";
             $this->content->text .= get_string('undefined_coursecriteria', 'block_course_status_tracker')." : <b>".$course_criteria_not_set."</b><br>";
@@ -114,4 +117,4 @@ class block_course_status_tracker extends block_base {
         }
         return $this->content;
     }
-}   
+}
