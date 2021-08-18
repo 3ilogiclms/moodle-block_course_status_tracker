@@ -97,14 +97,14 @@ class block_course_status_tracker extends block_base {
             // Course inprogress
             $count_inprogress_courses = abs(($enrolled_courses) - ($count_complete_courses + $course_criteria_not_set));
             if ($enrolled_courses > 0) {
-                $link_enrolled_courses = "<u><a href='" . $CFG->wwwroot . "/blocks/course_status_tracker/view.php?viewpage=2'>" .
-                        $enrolled_courses . "</a></u>";
+                $link_enrolled_courses = "<a href='" . $CFG->wwwroot . "/blocks/course_status_tracker/view.php?viewpage=2'>" .
+                        $enrolled_courses . "</a>";
             } else {
                 $link_enrolled_courses = $enrolled_courses;
             }
             if ($count_complete_courses > 0) {
-                $link_count_complete_courses = "<u><a href='" . $CFG->wwwroot . "/blocks/course_status_tracker/view.php?viewpage=1'>" .
-                        $count_complete_courses . "</a></u>";
+                $link_count_complete_courses = "<a href='" . $CFG->wwwroot . "/blocks/course_status_tracker/view.php?viewpage=1'>" .
+                        $count_complete_courses . "</a>";
             } else {
                 $link_count_complete_courses = $count_complete_courses;
             }
@@ -118,8 +118,8 @@ class block_course_status_tracker extends block_base {
 
 
             if ($course_criteria_not_set > 0) {
-                $link_course_criteria_not_set = "<u><a href='" . $CFG->wwwroot . "/blocks/course_status_tracker/view.php?viewpage=3'>" .
-                        $course_criteria_not_set . "</a></u>";
+                $link_course_criteria_not_set = "<a href='" . $CFG->wwwroot . "/blocks/course_status_tracker/view.php?viewpage=3'>" .
+                        $course_criteria_not_set . "</a>";
             } else {
                 $link_course_criteria_not_set = $course_criteria_not_set;
             }
@@ -129,8 +129,8 @@ class block_course_status_tracker extends block_base {
 
 
             if ($count_inprogress_courses > 0) {
-                $link_count_inprogress_courses = "<u><a href='" . $CFG->wwwroot . "/blocks/course_status_tracker/view.php?viewpage=4'>" .
-                        $count_inprogress_courses . "</a></u>";
+                $link_count_inprogress_courses = "<a href='" . $CFG->wwwroot . "/blocks/course_status_tracker/view.php?viewpage=4'>" .
+                        $count_inprogress_courses . "</a>";
             } else {
                 $link_count_inprogress_courses = $count_inprogress_courses;
             }
